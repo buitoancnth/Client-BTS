@@ -1,0 +1,80 @@
+﻿
+
+<div class="row" ng-controller="editTramController" style="margin:10px; margin-bottom:70px;">
+
+    <hr />
+
+
+    <div class="col-md-6">
+        <div class="row">
+            <form ng-submit="CapNhatTram(Tram.IDTram,Tram)">
+                <div class="col-md-12">
+
+                    <h3><b>Nhập Địa Chỉ Trạm:</b></h3>
+                    <input type="text" gm-places-autocomplete ng-model="autocomplete" style="width: 300px;" />
+
+                    <h4>Thông Tin Địa Chỉ:</h4>
+                    <ul>
+                        <li>Kinh Độ: {{ Tram.ViDo }}</li>
+                        <li>Vĩ Độ: {{ Tram.KinhDo }}</li>
+                    </ul>
+                </div>
+                <div class="col-md-12">
+
+                    <table class="table table-bordered">
+                        <tr>
+                            <td width="50%">Tên Trạm</td>
+
+                            <td><input size="40%" type="text" ng-model="Tram.TenTram" name="TenTram" required /></td>
+                        </tr>
+                        <tr>
+                            <td>Địa Chỉ</td>
+
+                            <td><input size="40%" type="text" ng-model="Tram.Tinh" name="DiaChi" required /></td>
+                        </tr>
+                        <tr>
+                            <td>Kinh Độ</td>
+
+                            <td><input size="40%" type="text" ng-model="Tram.ViDo" name="KinhDo" required /></td>
+                        </tr>
+                        <tr>
+                            <td>Vĩ Độ</td>
+
+                            <td><input size="40%" type="text" ng-model="Tram.KinhDo" name="ViDo" required /></td>
+                        </tr>
+                        <tr>
+                            <td>Người Quản Lý</td>
+
+                            <td>
+                                <select style="width:100%" ng-model="Tram.IDQuanLy" required>
+                                    <option ng-repeat="x in names" value="{{x.IDUser}}">{{x.Ten}}</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Bán Kính Phủ Sóng</td>
+
+                            <td><input size="40%" type="number" min="1" max="100" ng-model="Tram.BanKinhPhuSong" name="BanKinh" required />&nbsp;&nbsp;Kilomet</td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div class="col-md-12">
+                    <input type="submit" id="submit" value="Cập Nhật Trạm" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom">
+            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+               
+            </ui-gmap-marker>
+        </ui-gmap-google-map>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,33 @@
+﻿<div class="jumbotron">
+    <div class="container">
+        <div class="page-header text-center">
+            <h2>Hệ Thống Quản Lý Trạm Phát Sóng BTS</h2>
+        </div>
+        <p><center>Đăng Nhập Để Tiếp Tục</center></p>
+    </div>
+</div>
+
+<form role="form">
+    <div class="row">
+        <div class="col-md-4">
+            &nbsp;
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" placeholder="Username" data-ng-model="loginData.userName" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" data-ng-model="loginData.password" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"><strong> Remember PassWord</strong>
+                </label>
+            </div>
+            <button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="login()">Login</button>
+              <div data-ng-hide="message == ''" class="alert alert-danger">
+                {{message}}
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            &nbsp;
+        </div>
+    </div>
+</form>

@@ -1,0 +1,73 @@
+﻿
+<div style="margin:40px; margin-top:60px;" data-ng-controller="ListUserController">
+    <h3>Thêm Mới Quản Lý</h3>
+    <form name="QuanLy" data-ng-submit="ThemUser()">
+        <table class="table table-bordered">
+            <tr>
+                <th>Hình Ảnh</th>
+                <th>Tên User</th>
+                <th>Email</th>
+                <th>Địa Chỉ</th>
+                <th>Ngày Sinh</th>
+                <th>Giới Tính</th>
+                <th>Số Điện Thoại</th>
+                <th>Vai Trò</th>
+
+            </tr>
+            <tr>
+                <td><img data-ng-src='http://localhost:57219/image/tam_12345.jpg' style="width:150px;height:150px;"></td>
+                <td><input type="text" data-ng-model="Ten" required /></td>
+                <td><input type="email" data-ng-model="Email" required /></td>
+                <td><input type="text" data-ng-model="DiaChi" required /></td>
+                <td><input type="date" data-ng-model="NgaySinh" required /></td>
+                <td><select style="width:100%" data-ng-model="GioiTinh" required>
+                    <option value="Nam">Nam</option>
+                    <option value="Nu">Nữ</option>
+                </select></td>
+                
+                <td><input type="text" data-ng-model="Phone" required /></td>
+                <td>
+                    <select style="width:100%" data-ng-model="ChucVu" required>
+                        <option  value="QuanLy">QuanLy</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </td>
+
+            </tr>
+        </table>
+        <input type="submit" id="submit" value="Thêm Quản Lý" />
+    </form>
+    <h3>Danh Sách User</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>STT</th>
+            <th>Hình Ảnh</th>
+            <th>Tên User</th>
+            <th>Email</th>
+            <th>Địa Chỉ</th>
+            <th>Ngày Sinh</th>
+            <th>Số Điện Thoại</th>
+            <th>Vai Trò</th>
+            <th>Danh Sách Trạm Quản Lý</th>
+            <th>Hành Động</th>
+        </tr>
+        <tr data-ng-repeat="user in Users">
+            <td>{{$index +1}}</td>
+            <td><img data-ng-src='http://localhost:57219/image/{{user.Image}}' style="width:150px;height:150px;"></td>
+            <td>{{user.Ten}}</td>
+            <td>{{user.Email}}</td>
+            <td>{{user.DiaChi}}</td>
+            <td>{{user.NgaySinh | date:'dd/MM/yyyy'}}</td>
+            <td>{{user.Phone}}</td>
+            <td>
+                <select style="width:100%" data-ng-model="user.ChucVu" required>
+                    <option value="QuanLy">QuanLy</option>
+                    <option value="Admin">Admin</option>
+                </select>
+            </td>
+            <td><a href="#/danh-sach-tram-quan-ly?id={{user.IDUser}}">Xem Thêm</a></td>
+            <td><input type="button" value="Xóa User" data-ng-click="XoaUser(user.IDUser)"/><input type="button" value="Update Quyền" data-ng-click="Update(user.Email,user.ChucVu)" /></td>
+        </tr>
+
+    </table>
+</div>

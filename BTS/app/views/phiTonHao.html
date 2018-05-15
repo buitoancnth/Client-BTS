@@ -1,0 +1,23 @@
+﻿<div class="Phi" style="width:85%;float:left">
+    <table class="table table-bordered">
+        <tr>
+            <td>STT</td>
+            <td>Ngày Mất Điện</td>
+            <td>Giờ Mất Điện</td>
+            <td>Thời Gian <br /> Máy Nổ Chạy</td>
+            <td>Thời Gian Máy <br />Nổ Ngưng Chạy</td>
+            <td>Quảng Đường<br /> Di Chuyển</td>
+            <td>Tiền Phạt</td>
+            <td>Hành Động</td>
+        </tr>
+        <tr data-ng-repeat="tienphi in TienPhis">
+            <td>{{$index+1}}</td>
+            <td>{{tienphi.NgayMayDien}}</td>
+            <td>{{tienphi.GioMatDien}}</td>
+            <td>{{tienphi.ThoiGianMayNo}}</td>
+            <td>{{tienphi.ThoiGianNgung}}</td>
+            <td>{{tienphi.QuangDuongDiChuyen}}</td>
+            <td>{{tienphi.TienPhat}}</td>
+        </tr>
+    </table>
+</div>

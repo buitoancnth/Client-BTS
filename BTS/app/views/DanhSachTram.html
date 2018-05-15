@@ -1,0 +1,23 @@
+﻿
+<div class="container" style="margin-top:40px;" data-ng-controller="DanhSachTramController">
+    <h3>Danh Sách Trạm BTS Tổng Quan </h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>STT</th>
+            <th>Tên Trạm</th>
+            <th>Địa Chỉ</th>
+            <th>Kinh Độ</th>
+            <th>Vĩ Độ</th>
+            <th>Chi Tiết</th>
+        </tr>
+        <tr data-ng-repeat="tram in Trams">
+            <td>{{$index +1}}</td>
+            <td>{{tram.TenTram}}</td>
+            <td>{{tram.Tinh}}</td>
+            <td>{{tram.KinhDo}}</td>
+            <td>{{tram.ViDo}}</td>
+            <td><a href="#/quan-ly-tram?id={{tram.IDTram}}">Xem Thêm</a></td>
+        </tr>
+
+    </table>
+</div>

@@ -1,0 +1,296 @@
+﻿
+<div class="" style="padding-top:50px;margin:-4px 10px 0px 10px;overflow-y:scroll; margin-bottom:60px;">
+    <div data-ng-controller="quanLyTramController">
+        <div class="brand"><h3 style="color:red;text-align:center;"><b>Trạm Phát Sóng Di Động: {{Tram.TenTram}}</b></h3></div>
+        <div class= "tabbable tabs-left">
+                <ul class="nav nav-tabs">
+                    <li data-ng-class="getTabClass(1)" data-ng-click="setActiveTab(1)"><a  data-toggle="tab">Thông Tin Trạm</a></li>
+                    <li data-ng-class="getTabClass(2)" data-ng-click="setActiveTab(2)"><a  data-toggle="tab">Thông Tin Nhà Trạm</a></li>
+                    <li data-ng-class="getTabClass(3)" data-ng-click="setActiveTab(3)"><a  data-toggle="tab">Quản Lý Nhà Mạng</a></li>
+                    <li data-ng-class="getTabClass(4)" data-ng-click="setActiveTab(4)"><a data-toggle="tab">Chi Phí Tổn Hao</a></li>
+                </ul>
+                <div class="tab-content" >
+                    <div ng-class="getTabPaneClass(1)">
+                            <div class="infor" style="float:left;width:35%;">
+                                <form ng-submit="UpdateTram(Tram.IDTram,Tram)">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td width="50%">Tên Trạm</td>
+
+                                            <td>{{Tram.TenTram}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Địa Chỉ</td>
+
+                                            <td>{{Tram.Tinh}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Kinh Độ</td>
+
+                                            <td>{{Tram.KinhDo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vĩ Độ</td>
+
+                                            <td>{{Tram.ViDo}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Người Quản Lý</td>
+
+                                            <td>{{TenQuanLy}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bán Kính Phủ Sóng</td>
+
+                                            <td>{{Tram.BanKinhPhuSong}}</td>
+                                        </tr>
+
+
+
+                                    </table>
+                                    <a data-ng-show="quyen==='Admin'" href="#/edit-tram?id={{Tram.IDTram}}"><input type="button" class="button" value="Cập Nhật Thông Tin Trạm" /></a>
+                                    <hr />
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td></td>
+
+                                            <td width="50%">Tình Trạng</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cột Anten</td>
+
+                                            <td><input data-ng-readonly="quyen==='Admin'" type="number" min="1" max="15" ng-model="Tram.CotAnten" name="CotAnTen" id="number" required />&nbsp;&nbsp;{{Tram.CotAnten | myFormat}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cột Tiếp Đất</td>
+
+                                            <td><input data-ng-readonly="quyen==='Admin'" type="number" min="1" max="15" ng-model="Tram.CotTiepDat" name="CotTiepDat" id="number" required />&nbsp;&nbsp;{{Tram.CotTiepDat | myFormat}}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Sân Trạm</td>
+
+                                            <td><input data-ng-readonly="quyen==='Admin'" type="number" min="1" max="15" ng-model="Tram.SanTram" name="SanTram" id="number" required />&nbsp;&nbsp;{{Tram.SanTram | myFormat}}</td>
+                                        </tr>
+
+                                    </table>
+                                    <input data-ng-show="quyen==='QuanLy'" type="submit" id="submit" value="Cập Nhật Thông Tin Trạm" /> 
+                                </form>
+                                <hr />
+                                
+                            </div>
+                            
+                        <div class="silde" style="float:right;">
+
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <div id="slides_control" style="float:right;">
+                                            
+                                                <carousel interval="myInterval">
+                                                    <slide ng-repeat="slide in slides" active="slide.active">
+                                                        <img data-ng-src='http://localhost:57219/image/{{slide.Ten}}' style="width:600px;height:400px;">
+                                                    </slide>
+                                                   
+                                                </carousel>
+                                            </div>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="le">
+                                        <input type="file" id="file" name="file" multiple onchange="angular.element(this).scope().getFileDetails(this)" />
+                                        <input type="button" ng-click="uploadFiles()" value="Upload Ảnh Cho Trạm" />
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                       
+                   </div>
+                    <div data-ng-class="getTabPaneClass(2)" data-ng-controller="nhaTramController">
+                       <input data-ng-show="quyen==='Admin'" type="button" style="color:blue;" ng-click="ThemNhaTram(1)" value="Thêm Nhà Trạm Mới" />
+                        <hr />
+                        <div class="infor" style="width:85%;float:left;">
+                            <form name="Data" ng-submit="Update(nhaTram.IDNhaTram,nhaTram)"  data-ng-repeat="nhaTram in NhaTrams">
+                                <table class="table table-bordered" >
+
+                                    <caption style="float:left;width:200px;">Nhà Mạng:{{nhaTram.TenNhaMang}} </caption>
+                                    <tr>
+                                        <td>Tên Thiết Bị</td>
+                                        <td>Cầu Cáp</td>
+                                        <td>Hệ Thống Điện</td>
+                                        <td>Hàng Rào</td>
+                                        <td>Điều Hòa</td>
+                                        <td>Ổn Áp</td>
+                                        <td>Cảnh Báo</td>
+                                        <td>Bình Cứu Hỏa</td>
+                                        <td ng-hide="nhaTram.ChungMayPhat">Máy Phát Điện</td>
+                                        <td>Chung Máy Phát</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tình Trạng</td>
+                                        <td><input type="number" data-ng-readonly="quyen==='Admin'" min="1" max="15" ng-model="nhaTram.CauCap" name="CauCap"  id="number" required/>{{nhaTram.CauCap | myFormat}}</td>
+                                        <td><input type="number" data-ng-readonly="quyen==='Admin'" min="1" max="15" ng-model="nhaTram.HeThongDien" name="HeThongDien" id="number" required/>{{nhaTram.HeThongDien | myFormat}}</td>
+                                        <td><input type="number" data-ng-readonly="quyen==='Admin'" name="HangRao" id="number" min="1" max="15" ng-model="nhaTram.HangRao" required/>{{nhaTram.HangRao | myFormat}}</td>
+                                        <td><input type="number" data-ng-readonly="quyen==='Admin'" name="DieuHoa"  id="number" min="1" max="15" ng-model="nhaTram.DieuHoa" required/>{{nhaTram.DieuHoa | myFormat}}</td>
+                                        <td><input type="number" data-ng-readonly="quyen==='Admin'" name="OnAp" id="number" min="1" max="15" ng-model="nhaTram.OnAp" required/>{{nhaTram.OnAp | myFormat}}</td>
+                                        <td><input type="number" data-ng-readonly="quyen==='Admin'" name="CanhBao" id="number" min="1" max="15" ng-model="nhaTram.CanhBao" required/>{{nhaTram.CanhBao | myFormat}}</td>
+                                        <td><input type="number" data-ng-readonly="quyen==='Admin'" name="BinhCuuHoa" id="number"  min="1" max="15" ng-model="nhaTram.BinhCuuHoa" required/>{{nhaTram.BinhCuuHoa | myFormat}}</td>
+                                        <td ng-hide="nhaTram.ChungMayPhat"><input data-ng-readonly="quyen==='Admin'" type="number" name="MayPhatDien" id="number" min="1" max="15" ng-model="nhaTram.MayPhatDien" required/>{{nhaTram.MayPhatDien | myFormat}}</td>
+                                        <td><input data-ng-disabled ="quyen==='Admin'" type="checkbox" name="ChungMayPhat" ng-model="nhaTram.ChungMayPhat"/></td>
+                                    </tr>
+                                </table>
+                                <input data-ng-show="quyen==='QuanLy'" type="submit" id="submit" style="color:coral;" value="Cập Nhật Thông Tin Nhà Trạm" />
+                               <hr />
+                            </form>
+                            <div data-ng-repeat="i in [1,2,3,4,5] track by $index" >
+                                <form name="AddNhaTram{{$index}}" ng-submit="AddNhaTram($index)" ng-show="show{{$index}}">
+
+                                    <table id="nhatram" class="table table-bordered">
+
+                                        <caption style="float:left;width:200px;">Nhà Mạng:
+                                            <select style="width:100%" ng-model="IDNhaMang[$index]" ng-required="true">
+                                                <option ng-repeat="x in NhaMangs" value="{{x.IDNhaMang}}">{{x.TenNhaMang}}</option>
+                                            </select><br />
+                                        </caption>
+                                        <tr>
+                                            <td>Tên Thiết Bị</td>
+                                            <td>Cầu Cáp</td>
+                                            <td>Hệ Thống Điện</td>
+                                            <td>Hàng Rào</td>
+                                            <td>Điều Hòa</td>
+                                            <td>Ổn Áp</td>
+                                            <td>Cảnh Báo</td>
+                                            <td>Bình Cứu Hỏa</td>
+                                            <td ng-hide="ChungMayPhat[$index]">Máy Phát Điện</td>
+                                            <td>Chung Máy Phát</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Tình Trạng</td>
+                                            <td><input type="number" min="1" max="15" ng-model="CauCap[$index]" name="CauCap" id="number" required />{{CauCap[$index] | myFormat}}</td>
+                                            <td><input type="number" min="1" max="15" ng-model="HeThongDien[$index]" name="HeThongDien" id="number" required />{{HeThongDien[$index] | myFormat}}</td>
+                                            <td><input type="number" name="HangRao" id="number" min="1" max="15" ng-model="HangRao[$index]" required />{{HangRao[$index] | myFormat}}</td>
+                                            <td><input type="number" name="DieuHoa" id="number" min="1" max="15" ng-model="DieuHoa[$index]" required />{{DieuHoa[$index] | myFormat}}</td>
+                                            <td><input type="number" name="OnAp" id="number" min="1" max="15" ng-model="OnAp[$index]" required />{{OnAp[$index] | myFormat}}</td>
+                                            <td><input type="number" name="CanhBao" id="number" min="1" max="15" ng-model="CanhBao[$index]" required />{{CanhBao[$index] | myFormat}}</td>
+                                            <td><input type="number" name="BinhCuuHoa" id="number" min="1" max="15" ng-model="BinhCuuHoa[$index]" required />{{BinhCuuHoa[$index] | myFormat}}</td>
+                                            <td ng-hide="ChungMayPhat[$index]"><input type="number" name="MayPhatDien" id="number" min="1" max="15" ng-model="MayPhatDien[$index]" required />{{MayPhatDien[$index] | myFormat}}</td>
+                                            <td><input type="checkbox" name="ChungMayPhat" ng-model="ChungMayPhat[$index]" ng-init="ChungMayPhat[$index] = false" /></td>
+                                        </tr>
+                                    </table>
+
+                                    <input type="submit" id="submit" style="color:forestgreen;"value="Thêm Nhà Trạm" />
+                                    <input type="button" ng-click="xoa($index)" style="color:red;" value="Xóa Nhà Trạm" />
+                                    <hr />
+                                </form>
+                            </div>
+                            
+                            <label><u>Ghi chú: </u></label><br />
+                            <label>(1-5): Tình Trạng Xấu</label><br />
+                            <label>(5-10): Tình Trạng Trung Bình</label><br />
+                            <label>(10-15): Tình Trạng Tốt</label><br />
+                            
+                        </div>
+                    </div>
+                    
+                    <div data-ng-class="getTabPaneClass(3)" data-ng-controller="nhaMangController">
+                            <input type="button" style="color:blue;" ng-click="ThemNhaMang(1)" value="Thêm Nhà Mạng Mới" />
+                            <hr />
+                            <div class="infor" style="width:30%;float:left;">
+                                <form name="Data" ng-submit="UpdateNhaMang(nhaMang.IDNhaMang)" data-ng-repeat="nhaMang in NhaMangs">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>Tên Nhà Mạng</td>
+                                            <td><input type="text" ng-model="nhaMang.TenNhaMang" name="TenNhaMang" required /></td>
+                                            
+                                        </tr>
+                                    </table>
+                                    <input type="submit" id="submit" style="color:coral;" value="Cập Nhật Thông Tin Nhà Mạng" />
+                                    <hr />
+                                </form>
+                                <div data-ng-repeat="i in [1,2,3,4,5] track by $index">
+                                    <form name="AddNhaMang{{$index}}" ng-submit="AddNhaMang($index)" ng-show="ShowNew{{$index}}">
+
+                                        <table id="nhamang" class="table table-bordered">
+
+                                            
+                                            <tr>
+                                                <td>Tên Nhà Mạng</td>
+                                                <td><input type="text" ng-model="TenNhaMang[$index]" name="TenNhaMang" required /></td>
+                                                
+                                            </tr>
+                                            
+                                        </table>
+
+                                        <input type="submit" id="submit" style="color:forestgreen;" value="Thêm Nhà Mạng" />
+                                        <input type="button" ng-click="XoaNhaMang($index)" style="color:red;" value="Xóa Nhà Trạm" />
+                                        <hr />
+                                    </form>
+                                </div>
+
+                           
+
+                            </div>
+                        </div>
+                    <div data-ng-class="getTabPaneClass(4)"data-ng-controller="phiTonHaoController">
+                        <div class="Phi" style="width:85%;float:left">
+                            <form data-ng-show="quyen==='QuanLy'" name="ThemChiPhi" ng-submit="ThemPhi(matDien)">
+                                <table class="table table-bordered">
+                                    <tr>
+
+                                        <td>Ngày Mất Điện</td>
+                                        <td>Giờ Mất Điện</td>
+                                        <td>Thời Gian <br /> Máy Nổ Chạy</td>
+                                        <td>Thời Gian Máy <br />Nổ Ngưng Chạy</td>
+                                        <td>Tổng Thời Gian<br /> Chạy Máy Nổ</td>
+                                        <td>Quảng Đường<br /> Di Chuyển</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="date" data-ng-model="matDien.NgayMatDien " /></td>
+                                        <td><input type="time" data-ng-model="matDien.GioMatDien" /></td>
+                                        <td><input type="time" data-ng-change="TinhToanTime1(matDien.GioMatDien,matDien.ThoiGianMayNo)" data-ng-model="matDien.ThoiGianMayNo" /></td>
+                                        <td><input type="time" data-ng-change="TinhToanTime(matDien.ThoiGianMayNo,matDien.ThoiGianNgung)" data-ng-model="matDien.ThoiGianNgung" /></td>
+                                        <td>{{tongtime}}</td>
+                                        <td><input type="number" data-ng-model="matDien.QuangDuongDiChuyen" />&nbsp;&nbsp;KM</td>                     
+                                    </tr>
+                                    
+                                </table>
+                                <input type="submit" id="submit" value="Thêm" />
+                                <hr />
+                            </form>
+                            
+
+                            <h2>Lịch Sử</h2>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td>STT</td>
+                                    <td>Ngày Mất Điện</td>
+                                    <td>Giờ Mất Điện</td>
+                                    <td>Thời Gian <br /> Máy Nổ Chạy</td>
+                                    <td>Thời Gian Máy <br />Nổ Ngưng Chạy</td>
+                                    <td>Tổng Thời Gian<br /> Chạy Máy Nổ</td>
+                                    <td>Quảng Đường<br /> Di Chuyển (KM)</td>
+                                    <td>Tiền Phạt</td>
+                              
+                                </tr>
+                                <tr data-ng-repeat="tienphi in TienPhis">
+                                    <td>{{$index+1}}</td>
+                                    <td>{{tienphi.NgayMatDien | date:'dd/MM/yyyy'}}</td>
+                                    <td>{{tienphi.GioMatDien}}</td>
+                                    <td>{{tienphi.ThoiGianMayNo}}</td>
+                                    <td>{{tienphi.ThoiGianNgung}}</td>
+                                    <td>{{tienphi.TongThoiGianChay}}</td>
+                                    <td>{{tienphi.QuangDuongDiChuyen}}</td>
+                                    <td>{{tienphi.TienPhat}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+       </div>
+    </div>
+</div>
+            

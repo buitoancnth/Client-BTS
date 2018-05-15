@@ -1,0 +1,66 @@
+﻿
+<div class="" style="padding-top:50px">
+    <div data-ng-controller="tramsController">
+        <div class="locations">
+            <div class="nav-side-menu">
+                <div class="brand">BTS - Location</div>
+                <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+                <div class="menu-list">
+
+                    <ul id="menu-content" class="menu-content collapse out">
+                        
+                        <li data-toggle="collapse" data-target="#products" class="collapsed">
+                            <a ><i class="glyphicon glyphicon-list-alt"></i> Danh Sách Trạm BTS <span class="arrow"></span></a>
+                        </li>
+                        <ul class="sub-menu collapse" id="products">
+                            <li data-ng-repeat="l in locations" data-ng-click="ShowLocation(l.IDTram)"><a >{{l.TenTram}}</a></li>
+                        </ul>
+
+                        <li data-toggle="collapse" data-target="#service" class="collapsed">
+                            <a href="#/danh-sach-tram-grid"><i class="fa fa-globe fa-lg"></i> Danh Sách Trạm BTS (Grid)</a>
+                        </li>
+                      
+
+                        <li data-ng-show="quyen==='Admin'" data-toggle="collapse" data-target="#dd-tram" class="collapsed">
+                            <a href="#/add-tram"><i class="fa fa-car fa-lg"></i> New <span class="arrow"></span></a>
+                        </li>
+                        
+                        <li>
+                            <a >
+                                <i class="fa fa-user fa-lg"></i> Profile
+                            </a>
+                        </li>
+                        <li data-ng-show="quyen==='Admin'">
+                            <a href="#/danh-sach-user">
+                                <i class="fa fa-users fa-lg"></i> Users
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="maps">
+            <!-- Add directive code (gmap directive) for show map and markers-->
+            <ui-gmap-google-map center="map.center" zoom="map.zoom">
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                    <ui-gmap-window options="windowOptions" show="windowOptions.show">
+                        <div style="max-width:200px">
+                            <div class="header"><strong>{{marker.TenTram}}</strong></div>
+                            <div id="mapcontent">
+                                <p>
+                                    <img ng-src="{{marker.image}}" style="width:200px; height:100px" />
+                                    <div>
+                                        {{marker.address}}
+
+                                        <a href="#/quan-ly-tram?id={{marker.id}}">Quản Lý</a>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
+        </div>
+    </div>
+</div>
